@@ -23,6 +23,12 @@ stages:
       displayName: "Suppress welcome message"
       inputs:
         script: 'touch "$HOME"/.dotnet/"$(dotnet --version)".dotnetFirstUseSentinel'
+    - task: FileTransform@1
+      displayName: Prepare app-settings.json
+      inputs:
+        folderPath: '$(System.DefaultWorkingDirectory)'
+        fileType: 'json'
+        targetFiles: 'appsettings.json'
     - task: DotNetCoreCLI@2
       displayName: "Build Huxley 2"
       env:
